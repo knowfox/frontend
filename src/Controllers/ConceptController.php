@@ -24,7 +24,7 @@ use App\Http\Controllers\Controller;
 use Knowfox\Core\Models\Concept;
 use Knowfox\Core\Resources\Concept as ConceptResource;
 use Knowfox\Core\Requests\ConceptRequest;
-use Knowfox\Core\Activities\ConceptActivity;
+use Knowfox\Core\Actions\ConceptAction;
 use Knowfox\Core\Services\PictureService;
 use Knowfox\Crud\Services\Crud;
 
@@ -33,21 +33,21 @@ class ConceptController extends Controller
     protected $crud;
     protected $activity;
 
-    public function __construct(Crud $crud, ConceptActivity $activity)
+    public function __construct(Crud $crud, ConceptAction $action)
     {
         $this->crud = $crud;
         $this->crud->setup('frontend.concept');
-        $this->activity = $activity;
+        $this->action = $action;
     }
 
     public function index(Request $request, $special = false)
     {
-        return view('frontend::concept.index', ['concepts' => $activity->index($request, 'index')]);
-    }
-
-    public function create()
-    {
-        return $this->crud->create();
+        return $this->crud->index($request, 
+            $this->action->index($request, 'index'),
+            function ($request, $entities) {
+                return $this->action->postProcess($request, $entities);
+            }
+        );
     }
 
     public function create()

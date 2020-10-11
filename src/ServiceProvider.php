@@ -19,7 +19,7 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
-    protected $namespace = '\Knowfox\Core\Controllers';
+    protected $namespace = '\Knowfox\Frontend\Controllers';
 
     /**
      * Register services.

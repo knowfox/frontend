@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'Knowfox') }}</title>
 
-        @include("core::{$theme}.partials.favicon")
+        @include("frontend::{$theme}.partials.favicon")
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -33,12 +33,12 @@
             
             <!--
             <div class="uk-background-primary uk-light">
-                @_include("core::{$theme}.partials.navbar")
+                @_include("frontend::{$theme}.partials.navbar")
             </div>
             -->
 
             <div id="menu" uk-offcanvas="overlay: true">
-                @include("core::{$theme}.partials.menu")
+                @include("frontend::{$theme}.partials.menu")
             </div>
 
             <main uk-height-viewport="expand: true">

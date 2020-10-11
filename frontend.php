@@ -4,8 +4,8 @@ use Knowfox\Core\Models\Concept;
 
 return [
     'concept' => [
-        'package' => 'core',
-        'layout' => 'core::' . config('crud.theme') . '.layouts.app',
+        'package' => 'frontend',
+        'layout' => 'frontend::' . config('crud.theme') . '.layouts.app',
         'has_create' => true,
         'home_route' => 'concept.index',
         'model' => Concept::class,
@@ -59,6 +59,8 @@ return [
                 'width' => '1-2',
                 'type' => 'select',
                 'option_values' => ['private', 'public'],
+                'default' => 'private',
+                'empty' => false,
             ],
             'todoist_id' => [
                 'label' => 'Todoist-ID',

@@ -1,2 +1,2 @@
-@extends('crud::' . $theme . '.index')
+@extends('crud::' . config('crud.theme') . '.index')
 
