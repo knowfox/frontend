@@ -1,0 +1,2 @@
+@extends('crud::' . $theme . '.index')
+
