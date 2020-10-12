@@ -36,7 +36,11 @@
 
         <p class="uk-text-meta">Concept <a href="/{{ $concept->id }}">{{ $concept->id }}</a>, 
             created at {{ $concept->created_at }}, 
-            viewed {{ $concept->viewed_count }} times.</p>
+            viewed {{ $concept->viewed_count }} times.
+            @if ($concept->type != 'concept')
+                <span class="uk-label">{{ $concept->type }}</span>
+            @endif
+        </p>
 
         @if ($concept->summary)
             <p class="uk-text-bold">{{ $concept->summary }}</p>
@@ -47,27 +51,32 @@
                 {!! $concept->rendered_body !!}
             </section>
 
-            @if ($concept->related && $concept->related->count() || $concept->inverse_related && $concept->inverse_related->count())
-                <section class="uk-width-1-3">
+            <section class="uk-width-1-3">
+                @if (!empty((array)$concept->config))
+                    <h2>Configuration</h2>
+                    {!! $concept->rendered_config !!}
+                @endif
+
+                @if ($concept->related && $concept->related->count() || $concept->inverse_related && $concept->inverse_related->count())
                     <h2>Related</h2>
-                    @if ($concept->related && $concept->related->count())
-                        <ul>
-                            @foreach ($concept->related as $related)
-                                <li>{{ $related->pivot->type }} 
-                                    <a class="uk-margin-small-left" href="/{{ $related->id }}">{{ $related->title }}</a></li>
-                            @endforeach 
-                        </ul>
-                    @endif
-                    @if ($concept->inverse_related && $concept->inverse_related->count())
-                        <ul>
-                            @foreach ($concept->inverse_related as $related)
-                                <li>{{ $related->pivot->type }} 
-                                    <a class="uk-margin-small-left" href="/{{ $related->id }}">{{ $related->title }}</a></li>
-                            @endforeach 
-                        </ul>
-                    @endif
-                </section>
-            @endif
+                @endif
+                @if ($concept->related && $concept->related->count())
+                    <ul>
+                        @foreach ($concept->related as $related)
+                            <li>{{ $related->pivot->type }} 
+                                <a class="uk-margin-small-left" href="/{{ $related->id }}">{{ $related->title }}</a></li>
+                        @endforeach 
+                    </ul>
+                @endif
+                @if ($concept->inverse_related && $concept->inverse_related->count())
+                    <ul>
+                        @foreach ($concept->inverse_related as $related)
+                            <li>{{ $related->pivot->type }} 
+                                <a class="uk-margin-small-left" href="/{{ $related->id }}">{{ $related->title }}</a></li>
+                        @endforeach 
+                    </ul>
+                @endif
+            </section>
 
             @livewire('children', [ 'concept' => $concept ])
         </div>
