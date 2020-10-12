@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Barryvdh\Cors\HandleCors;
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use Livewire\Livewire;
 
 use Knowfox\Core\Models\Concept;
 use Knowfox\Core\Policies\ConceptPolicy;
 
 use Knowfox\Frontend\ViewComposers\AlphaIndexComposer;
 use Knowfox\Frontend\ViewComposers\ImpactMapComposer;
+use Knowfox\Frontend\Livewire\Children;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
@@ -40,6 +42,8 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         View::composer('concept.show-impact-map', ImpactMapComposer::class);
         View::composer('partials.alpha-nav', AlphaIndexComposer::class);
+
+        Livewire::component('children', Children::class);
 
         //Route::model('concept', Concept::class);
 
