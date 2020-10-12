@@ -6,6 +6,7 @@ return [
     'concept' => [
         'package' => 'frontend',
         'layout' => 'frontend::' . config('crud.theme') . '.layouts.app',
+        'show' => true,
         'has_create' => true,
         'home_route' => 'concept.index',
         'model' => Concept::class,
@@ -14,7 +15,6 @@ return [
         'entity_title' => [' Concept', 'Concepts'],
 
         'columns' => [
-            'id' => 'ID',
             'title' => 'Title',
         ],
 
@@ -27,11 +27,15 @@ return [
                 'label' => 'Parent',
                 'width' => '1-2',
                 'type' => 'ref',
-                'url' => '/concepts',
+                'url' => '/api/concept',
             ],
             'type' => [
                 'label' => 'Type',
                 'width' => '1-2',
+                'type' => 'select',
+                'option_values' => config('knowfox.types'),
+                'empty' => false,
+                'default' => 'concept',
             ],
             'title' => [
                 'label' => 'Title',
@@ -41,7 +45,7 @@ return [
                 'type' => 'textarea',
             ],
             'body' => [
-                'label' => 'body',
+                'label' => 'Body',
                 'type' => 'markdown',
             ],
             'data' => [

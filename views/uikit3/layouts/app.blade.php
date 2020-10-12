@@ -9,18 +9,8 @@
 
         @include("frontend::{$theme}.partials.favicon")
 
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <style>
-        .uk-offcanvas-bar ul {
-        }
-        .uk-offcanvas-bar li.active {
-            border-left: solid 6px #87788E;
-            padding-left: 10px;
-            margin-left: -20px;
-            font-weight: bold;
-        }
-        </style>
 
         @livewireStyles
 

@@ -15,8 +15,6 @@ use Knowfox\Core\Policies\ConceptPolicy;
 use Knowfox\Frontend\ViewComposers\AlphaIndexComposer;
 use Knowfox\Frontend\ViewComposers\ImpactMapComposer;
 
-use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
-
 class ServiceProvider extends IlluminateServiceProvider
 {
     protected $namespace = '\Knowfox\Frontend\Controllers';
@@ -45,8 +43,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
         //Route::model('concept', Concept::class);
 
-        Route::prefix('frontend')
-            ->middleware('web')
+        Route::middleware('web')
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../routes/web.php');
 
